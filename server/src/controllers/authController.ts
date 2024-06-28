@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from "../models/User";
-import config from '../config/default';
+import generateToken from "../utils/generateToken";
 
 export const register = async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
@@ -18,7 +18,8 @@ export const register = async (req: Request, res: Response) => {
         const newUser = new User({ name, email, password: hashedPassword });
         await newUser.save();
 
-        const token = jwt.sign({ id: newUser._id }, config.JWT_SECRET, { expiresIn: '1h'})
+        const token = generateToken(newUser.id);
+        console.log('Generated Token:', token)
 
         res.status(201).json({ token });
     } catch (error) {
@@ -40,7 +41,11 @@ export const login = async (req: Request, res: Response) => {
             return res.status(400).json({ message: 'invalid credentials'});
 
         }
-        const token = jwt.sign({ id: user._id }, config.JWT_SECRET, { expiresIn: '1' });
+
+
+
+        const token = generateToken(user.id)
+        console.log('Generated Token:', token)
 
         res.status(200).json({ token });
     } catch (error) {

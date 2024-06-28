@@ -2,10 +2,9 @@ import { Request, Response } from "express";
 import Order from "../models/Order";
 import Stripe from 'stripe';
 import config from '../config/default';
+import { AuthenticatedRequest } from "../types/express";
 
-interface AuthenticatedRequest extends Request {
-    userId: string;
-}
+
 
 const stripe = new Stripe(config.STRIPE_SECRET_KEY);
 

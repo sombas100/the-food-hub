@@ -2,13 +2,14 @@ import { Request, Response } from "express";
 import Menu from "../models/Menu";
 import { cloudinary } from "../utils/cloudinary";
 import multer from "multer";
+import { AuthenticatedRequest } from "../types/express";
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 
-export const createMenuItem = async (req: Request, res: Response) => {
-    const { name, price, description } = req.body;
+export const createMenuItem = async (req: AuthenticatedRequest, res: Response) => {
+    const { name, price, description, resturant } = req.body;
     const image = req.file;
 
 try {
@@ -19,7 +20,14 @@ try {
         return result?.secure_url;
     });
 
-    const newMenuItem = await new Menu({ name, price, description, image: imageUrl });
+    const newMenuItem = await new Menu({ 
+        name, 
+        price, 
+        description, 
+        image: imageUrl,
+        resturant,
+        createdBy: req.userId
+    });
     await newMenuItem.save();
     res.status(201).json(newMenuItem);
 } catch (error) {
