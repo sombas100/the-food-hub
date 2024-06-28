@@ -18,7 +18,7 @@ export const createRestaurant = async (req: Request, res: Response) => {
 };
 
 
-export const  getAllRestaurants = async (req:Request, res: Response) => {
+export const  getAllRestaurants = async (req: Request, res: Response) => {
     try {
         const resturants = await Restaurant.find();
         res.json(resturants);
