@@ -7,6 +7,7 @@ import config from './config/default';
 import authRoutes from './routes/authRoutes';
 import menuRoutes from './routes/menuRoutes';
 import orderRoutes from './routes/orderRoutes';
+import restaurantRoutes from './routes/restaurantRoutes';
 
 
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api', restaurantRoutes);
 
 mongoose.connect(config.MONGO_URI)
 .then(() => console.log('MongoDB connected'))
