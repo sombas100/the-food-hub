@@ -9,7 +9,7 @@ interface MenuItem {
     image: string;
 }
 
-interface MenuState {
+export interface MenuState {
     menuItems: MenuItem[];
     loading: boolean;
     error: string | null;

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../api/axiosInstance";
 
-interface AuthState {
+export interface AuthState {
     token: string | null;
     loading: boolean;
     error: string | null;

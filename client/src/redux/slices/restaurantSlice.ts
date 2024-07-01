@@ -7,7 +7,7 @@ interface Restaurant {
     location: string;
 }
 
-interface RestaurantState {
+export interface RestaurantState {
     restaurants: Restaurant[];
     loading: boolean;
     error: string | null;
@@ -37,11 +37,11 @@ const restaurantSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(fetchRestaurants.fulfilled, (state) => {
+        .addCase(fetchRestaurants.pending, (state) => {
             state.loading = true;
             state.error = null;
         })
-        .addCase(fetchRestaurants.rejected, (state, action) => {
+        .addCase(fetchRestaurants.fulfilled, (state, action) => {
             state.loading = false;
             state.restaurants = action.payload;
         })

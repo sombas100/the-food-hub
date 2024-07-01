@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { act } from 'react';
+
 
 interface CartItem {
     id: string;
@@ -8,7 +8,7 @@ interface CartItem {
     quantity: number;
 }
 
-interface CartState {
+export interface CartState {
     items: CartItem[];
 }
 
